@@ -1,0 +1,158 @@
+<!doctype html>
+<html style="margin-left:350px; margin-right:350px; margin-top:50px;">
+<head>
+<meta charset="utf-8">
+<title>JQuery Validation</title>
+
+<script src="https://cdn.jsdelivr.net/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+<style type="text/css">
+
+* {
+box-sizing: border-box;
+}
+label {
+padding: 11px 12px 11px 2px;
+display: inline-block;
+}
+input[type=text], input[type=email], input[type=password], textarea {
+border: 2px solid #ccc;
+resize: vertical
+padding: 12px;
+border-radius: 4px;
+width: 100%;
+}
+.container {
+border-radius: 5px;
+background-color: #f2f2f2;
+padding: 20px;
+}
+form {
+padding: 20px;
+background: #2c3e50;
+color: #fff;
+border-radius: 4px;
+}
+
+.registerbtn {
+background-color: #4CAF50;
+color: white;
+padding: 12px 20px;
+margin: 8px 0;
+margin-left:410px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+float: right;
+}
+@media screen and (max-width: 560px) {
+.row {
+margin-top: 0;
+width: 100%;
+}
+}
+form .error {
+color: #ff0001;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<form class="form" id="MyForm" method="get" action="" name="MyForm">
+<fieldset>
+<legend>Registration Form</legend>
+<div class="row">
+<label for="FName">First Name</label>
+<input id="FName" placeholder="Enter First Name" name="FName" type="text" minlength="2">
+</div>
+<div class="row">
+<label for="LName">Last Name</label>
+<input id="LName" placeholder="Enter Last Name" name="LName" type="text">
+</div>
+<div class="row">
+<label for="Email">E-Mail</label>
+<input id="Email" placeholder="Enter E-Mail" type="email" name="Email">
+</div>
+<div class="row">
+<label for="Pwd">Password</label>
+<input type="password" placeholder="Enter Password" name="Pwd" id="Pwd" >
+</div>
+<div class="row">
+<label for="Cmt">Current Address</label>
+<textarea id="Cmt" placeholder="Enter Comment" name="Cmt"></textarea>
+</div>
+<div class="row">
+<label for="Add">Permanent Address</label>
+<textarea id="Add" placeholder="Enter Address" name="Add"></textarea>
+</div>
+<input type="checkbox" 
+id="same" 
+name="same" 
+onchange="addressFunction()" />Same As Current Address
+<label for="same">
+<form>
+    <table>
+        <tr>
+            <td>
+<label>Country</label>
+                <select class="country">
+                    <option>Select</option>
+                    <option value="a">Afghanistan</option>
+                    <option value="b">United States</option>
+                    <option value="c">India</option>
+                    <option value="d">United Kingdom</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+</form>
+<div class="row">
+    <input class="registerbtn" type="submit" value="Register">
+    </div>
+</fieldset>
+</form>
+</div>
+<script>
+$(document.body).css( "background", "skyblue" );
+function addressFunction() {
+                if (document.getElementById(
+                  "same").checked) {
+                    document.getElementById(
+                      "Add").value = 
+                    document.getElementById(
+                      "Cmt").value;
+                } else {
+                    document.getElementById(
+                      "Add").value = "";
+                }
+            }
+$(document).ready(function() {
+$("#MyForm").validate({
+rules: {
+'FName': {
+required: true,
+minlength: 2
+},
+'LName': {
+required: true,
+minlength: 2
+},
+'Email':{
+required: true,
+email:true,
+},
+'Pwd':{
+required: true,
+},
+},
+messages: {
+'FName': "Please enter a valid First Name.",
+'LName': "Please enter a valid Last Name.",
+'Email': "Please enter Email in proper format.",
+'Pwd': "Please enter a Password",
+}
+});
+});
+</script>
+</body>
+</html>
